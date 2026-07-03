@@ -1,15 +1,10 @@
 param(
-    [Alias('SourceDirectory', 'SrcDir')]
+    [Alias('SourceDirectory', 'SrcDir', 'Source', 'Src')]
     [AllowNull()]
     [AllowEmptyString()]
     [string]$SourceDirectoryPath = [NullString]::Value,
 
-    [Alias('OutputDirectory', 'OutDir')]
-    [AllowNull()]
-    [AllowEmptyString()]
-    [string]$OutputDirectoryPath = [NullString]::Value,
-
-    [Alias('OutputFile', 'Out')]
+    [Alias('OutputFile', 'OutFile', 'Output', 'Out')]
     [AllowNull()]
     [AllowEmptyString()]
     [string]$OutputFilePath = [NullString]::Value,
@@ -39,9 +34,6 @@ Import-Module -Name (Join-Path $PSScriptRoot "$([IO.Path]::GetFileNameWithoutExt
 if (-Not (Test-SourceDirectoryPath $SourceDirectoryPath)) {
     $SourceDirectoryPath = $DefaultSourceDirectoryPath
 }
-if (-Not (Test-OutputDirectoryPath $OutputDirectoryPath)) {
-    $OutputDirectoryPath = $DefaultOutputDirectoryPath
-}
 if (-Not (Test-OutputFilePath $OutputFilePath)) {
     $OutputFilePath = $DefaultOutputFilePath
 }
@@ -56,8 +48,6 @@ if (-Not (Test-SampleColorCount $SampleColorCount)) {
 if (-Not (Test-Path -LiteralPath $SourceDirectoryPath -PathType Container)) {
     throw Get-InvalidDirectoryPathErrorMessage(Get-NameOf { $SourceDirectoryPath })
 }
-
-$OutputFilePath = Join-Path $OutputDirectoryPath $OutputFilePath
 if (-Not (Test-Path -LiteralPath $OutputFilePath -IsValid)) {
     throw Get-InvalidFilePathErrorMessage(Get-NameOf { $OutputFilePath })
 }

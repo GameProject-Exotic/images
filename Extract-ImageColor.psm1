@@ -58,17 +58,6 @@ function Test-SourceDirectoryPath {
     return -Not [string]::IsNullOrWhiteSpace($Value)
 }
 
-function Test-OutputDirectoryPath {
-    param(
-        [Parameter(Mandatory)]
-        [AllowNull()]
-        [AllowEmptyString()]
-        [string]$Value
-    )
-
-    return -Not [string]::IsNullOrWhiteSpace($Value)
-}
-
 function Test-OutputFilePath {
     param(
         [Parameter(Mandatory)]
@@ -260,8 +249,7 @@ function Write-KeyValue {
 
 
 New-Constant -Name 'DefaultSourceDirectoryPath' -Value (Join-Path $PSScriptRoot 'maps' 'main')
-New-Constant -Name 'DefaultOutputDirectoryPath' -Value (Join-Path $PSScriptRoot 'maps')
-New-Constant -Name 'DefaultOutputFilePath' -Value 'colors.kv'
+New-Constant -Name 'DefaultOutputFilePath' -Value (Join-Path $PSScriptRoot 'maps' 'colors.kv')
 New-Constant -Name 'DefaultExcludeFilePath' -Value (Join-Path $PSScriptRoot 'maps' 'excludes.txt')
 New-Constant -Name 'DefaultSampleColorCount' -Value 4
 
