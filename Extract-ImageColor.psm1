@@ -35,7 +35,7 @@ function Get-InvalidDirectoryPathErrorMessage {
         [string]$ParamName
     )
 
-    return 'The specified $' + $ParamName + ' parameter represents an invalid directory path. It could be that the path does not exists, or it is not a directory!'
+    return "The specified `$$($ParamName) parameter represents an invalid directory path. It could be that the path does not exists, or it is not a directory!"
 }
 
 function Get-InvalidFilePathErrorMessage {
@@ -44,7 +44,7 @@ function Get-InvalidFilePathErrorMessage {
         [string]$ParamName
     )
 
-    return 'The specified $' + $ParamName + ' parameter represents an invalid file path. It could be that the path does not exists, or it is not a file!'
+    return "The specified `$$($ParamName) parameter represents an invalid file path. It could be that the path does not exists, or it is not a file!"
 }
 
 function Test-SourceDirectoryPath {
