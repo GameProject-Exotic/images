@@ -140,23 +140,21 @@ $includes | ForEach-Object {
 
     [int]$value = [Convert]::ToInt32($hex, 16)
 
-    Write-KeyValue $kv $_.BaseName $value
-
-    # Write-SectionStart $kv $_.BaseName
-    # # {
-    #     Write-KeyValue $kv $KeyValueColorValueKey $value
-    #     Write-KeyValue $kv $KeyValueColorHexKey $hex
-    #     Write-KeyValue $kv $KeyValueColorRedComponentKey $red
-    #     Write-KeyValue $kv $KeyValueColorGreenComponentKey $green
-    #     Write-KeyValue $kv $KeyValueColorBlueComponentKey $blue
-    #     Write-KeyValue $kv $KeyValueColorRedHexComponentKey $hred
-    #     Write-KeyValue $kv $KeyValueColorGreenHexComponentKey $hgreen
-    #     Write-KeyValue $kv $KeyValueColorBlueHexComponentKey $hblue
-    #     Write-KeyValue $kv $KeyValueColorHueComponentKey $hue
-    #     Write-KeyValue $kv $KeyValueColorSaturationComponentKey $saturation
-    #     Write-KeyValue $kv $KeyValueColorBrightnessComponentKey $brightness
-    # # }
-    # Write-SectionClose $kv
+    Write-SectionStart $kv $_.BaseName
+    # {
+        Write-KeyValue $kv $KeyValueColorValueKey $value
+        Write-KeyValue $kv $KeyValueColorHexKey $hex
+        Write-KeyValue $kv $KeyValueColorRedComponentKey $red
+        Write-KeyValue $kv $KeyValueColorGreenComponentKey $green
+        Write-KeyValue $kv $KeyValueColorBlueComponentKey $blue
+        Write-KeyValue $kv $KeyValueColorRedHexComponentKey $hred
+        Write-KeyValue $kv $KeyValueColorGreenHexComponentKey $hgreen
+        Write-KeyValue $kv $KeyValueColorBlueHexComponentKey $hblue
+        Write-KeyValue $kv $KeyValueColorHueComponentKey $hue
+        Write-KeyValue $kv $KeyValueColorSaturationComponentKey $saturation
+        Write-KeyValue $kv $KeyValueColorBrightnessComponentKey $brightness
+    # }
+    Write-SectionClose $kv
 
     ++$progress
 }
