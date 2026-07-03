@@ -1,5 +1,5 @@
 param(
-    [Alias('SourceDirectory', 'SrcDir', 'Source', 'Src')]
+    [Alias('SourceDirectory', 'SourceDir', 'SrcDir', 'Source', 'Src')]
     [AllowNull()]
     [AllowEmptyString()]
     [string]$SourceDirectoryPath = [NullString]::Value,
