@@ -110,7 +110,7 @@ $includes | ForEach-Object {
 
     [float]$weight = ($colors | Measure-Object Weight -Sum).Sum
     if ($weight -Ne 0) {
-        $red = ($colors | ForEach-Object -PipelineVariable x { $_.Red * $_.Weight } | Measure-Object -Sum).Sum / $weight
+        $red = ($colors | ForEach-Object { $_.Red * $_.Weight } | Measure-Object -Sum).Sum / $weight
         $green = ($colors | ForEach-Object { $_.Green * $_.Weight } | Measure-Object -Sum).Sum / $weight
         $blue = ($colors | ForEach-Object { $_.Blue * $_.Weight } | Measure-Object -Sum).Sum / $weight
     }
