@@ -123,7 +123,7 @@ $includes | ForEach-Object {
 
     [string]$hex = [string]::Join('', $hvals)
 
-    [string[]]$hsb = Convert-ToHsb $red $green $blue
+    [float[]]$hsb = Convert-ToHsb $red $green $blue
     [float]$hue = $hsb[0]
     [float]$saturation = $hsb[1]
     [float]$brightness = $hsb[2]
