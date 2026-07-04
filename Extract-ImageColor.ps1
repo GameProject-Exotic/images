@@ -58,7 +58,7 @@ if (Test-Path -LiteralPath $ExcludeFilePath -PathType Leaf) {
     $excludes = $excludes.Where({ $_ -Ne '' })
 }
 
-[object[]]$includes = (Get-ChildItem -LiteralPath $SourceDirectoryPath -Filter '*.jpg' -File -Force)
+[object[]]$includes = Get-ChildItem -LiteralPath $SourceDirectoryPath -Filter '*.jpg' -File -Force
 if ($excludes.Count -Ne 0) {
     $includes = $includes.Where({ $_.BaseName -NotIn $excludes })
 }
