@@ -96,7 +96,6 @@ $includes | ForEach-Object {
             [float]$weight = ($red * $count + $green * $count + $blue * $count) / 3
 
             [PSCustomObject]@{
-                Count = $count
                 Red = $red
                 Green = $green
                 Blue = $blue
