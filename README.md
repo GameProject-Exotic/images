@@ -22,7 +22,7 @@ No cat~ images! Only boring maps of fictional worlds.. [Squashing this dummy tri
 ```
 
 ### Format
-We use *.kv files ([Valve Data Format](https://developer.valvesoftware.com/wiki/VDF)) in our SourceMod plugins and currently have no need for other formats.
+We use *.kv ([Valve Data Format](https://developer.valvesoftware.com/wiki/VDF)) files in our SourceMod plugins and currently have no need for other formats.
 
 #### General
 [/maps/colors.kv](./maps/colors.kv)
