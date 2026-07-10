@@ -5,7 +5,7 @@ Mostly images for Trikz, Surf, and Bhop maps. And other visual assets we use..
 [Extract-ImageColor](./Extract-ImageColor.ps1) is a PowerSheel 7 script (enfores through `#Requires -Version 7`). It exists along side with its [helper-module](./Extract-ImageColor.psm1). It depends on [Image Magick](https://imagemagick.org) to get image histograms. The only thing it does, it iterates through images in a directory and then parses a histogram of every image, and writes it down to a *.kv ([Valve Data Format](https://developer.valvesoftware.com/wiki/VDF)) file.
 
 ### Parameters
-| Name | Alises | Default | Description | Behaviour |
+| Name | Aliases | Default | Description | Behaviour |
 |:-|:-|:-|:-|:-|
 | SourceDirectoryPath | 1. SourceDirectory<br>2. SourceDir<br>3. SrcDir<br>4. Source<br>5. Src | /maps/main/ | Relative or absolute path to a directory where all needed images reside. | Only checked for existence. |
 | OutputFilePath | 1. OutputFile<br>2. OutFile<br>3. Output<br>4. Out | /maps/colors.kv | Relative or absolute path to a file to which write calculated colors of images from \`SourceDirectoryPath\`. | Created if it does not exists, or overwritten if it does exists. |
