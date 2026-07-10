@@ -18,22 +18,22 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 param(
-    [Alias('SourceDirectory', 'SourceDir', 'SrcDir', 'Source', 'Src')]
+    [Alias('SourceDirectory', 'SourceDir', 'SrcDir', 'Source', 'Src', 'S')]
     [AllowNull()]
     [AllowEmptyString()]
     [string]$SourceDirectoryPath = [NullString]::Value,
 
-    [Alias('OutputFile', 'OutFile', 'Output', 'Out')]
+    [Alias('OutputFile', 'OutFile', 'Output', 'Out', 'O')]
     [AllowNull()]
     [AllowEmptyString()]
     [string]$OutputFilePath = [NullString]::Value,
 
-    [Alias('ExcludeFile', 'Exclude')]
+    [Alias('ExcludeFile', 'Exclude', 'E')]
     [AllowNull()]
     [AllowEmptyString()]
     [string]$ExcludeFilePath = [NullString]::Value,
 
-    [Alias('SampleCount')]
+    [Alias('SampleCount', 'C')]
     [AllowNull()]
     [Nullable[int]]$SampleColorCount = $null
 )

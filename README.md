@@ -7,10 +7,10 @@ Mostly images for Trikz, Surf, and Bhop maps. And other visual assets we use..
 ### Parameters
 | Name | Aliases | Default | Description | Behaviour |
 |:-|:-|:-|:-|:-|
-| SourceDirectoryPath | 1. SourceDirectory<br>2. SourceDir<br>3. SrcDir<br>4. Source<br>5. Src | /maps/main/ | Relative or absolute path to a directory where all needed images reside. | Only checked for existence. |
-| OutputFilePath | 1. OutputFile<br>2. OutFile<br>3. Output<br>4. Out | /maps/colors.kv | Relative or absolute path to a file to which write calculated colors of images from \`SourceDirectoryPath\`. | Created if it does not exists, or overwritten if it does exists. |
-| ExcludeFilePath | 1. ExcludeFile<br>2. Exclude | /maps/excludes.txt | Text file where every line is a \`BaseName\` of an image which needed to be excluded. | Empty list is used if that file does not exists. |
-| SampleColorCount | SampleCount | 4 | Number of colors of a single image to use for the image color calculation. | Just passed to Image Magick as a \`-colors\` parameter. |
+| SourceDirectoryPath | 1. SourceDirectory<br>2. SourceDir<br>3. SrcDir<br>4. Source<br>5. Src<br>6. S | /maps/main/ | Relative or absolute path to a directory where all needed images reside. | Only checked for existence. |
+| OutputFilePath | 1. OutputFile<br>2. OutFile<br>3. Output<br>4. Out<br>5. O | /maps/colors.kv | Relative or absolute path to a file to which write calculated colors of images from \`SourceDirectoryPath\`. | Created if it does not exists, or overwritten if it does exists. |
+| ExcludeFilePath | 1. ExcludeFile<br>2. Exclude<br>3. E | /maps/excludes.txt | Text file where every line is a \`BaseName\` of an image which needed to be excluded. | Empty list is used if that file does not exists. |
+| SampleColorCount | 1. SampleCount<br>2. C | 4 | Number of colors of a single image to use for the image color calculation. | Just passed to Image Magick as a \`-colors\` parameter. |
 
 ### Usage
 ```
