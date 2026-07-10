@@ -204,3 +204,5 @@ trikz_why
 trikz_ytt_aztec
 trikz_ytt_space_fix
 trikz_zen
+trikz_malice
+trikz_winter
