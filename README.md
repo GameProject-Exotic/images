@@ -68,4 +68,4 @@ We use *.kv ([Valve Data Format](https://developer.valvesoftware.com/wiki/VDF)) 
 ```
 
 ## License
-Licensed under the [GPL-3.0 license](./COPYING). Currently, applied only to [Extract-ImageColor.ps1](./Extract-ImageColor.ps1) and [Extract-ImageColor.psm1](./Extract-ImageColor.psm1) files.
+Licensed under the [GPL-3.0 license](./COPYING). Currently, applied only to [Extract-ImageColor.ps1](./Extract-ImageColor.ps1) and [Extract-ImageColor.psm1](./Extract-ImageColor.psm1) files, and also to the whole [/sourceindex/](./sourceindex/) project.
