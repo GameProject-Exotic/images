@@ -6,7 +6,6 @@ import * as fsp from 'fs/promises'
 const RES_DIR_PATH = path.join(__dirname, '..', 'res');
 const RES_RAW_DIR_PATH = path.join(RES_DIR_PATH, 'raw');
 const RES_MLIST_FILE_PATH = path.join(RES_DIR_PATH, 'mlist.txt');
-const RES_NLIST_FILE_PATH = path.join(RES_DIR_PATH, 'nlist.txt');
 
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
