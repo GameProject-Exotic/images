@@ -91,8 +91,4 @@ async function read(f: string): Promise<string[]> {
   return [];
 }
 
-async function sleep(t: number): Promise<void> {
-  return new Promise(r => setTimeout(r, t));
-}
-
 main();
