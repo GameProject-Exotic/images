@@ -249,3 +249,4 @@ surf_trapped
 surf_tronic_njv
 surf_utopia_njv
 surf_whiteout
+trikz_revo
