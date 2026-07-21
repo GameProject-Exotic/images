@@ -264,9 +264,65 @@ function Write-KeyValue {
     [void]$Builder.Append('"')
 }
 
+function ConvertTo-Vdf {
+    param(
+        [Parameter(Mandatory, ValueFromPipeline)]
+        [PSCustomObject]$Hash
+    )
+
+    $kv = [Text.StringBuilder]::new()
+    Write-SectionStart $kv $KeyValueColorRootSectionName
+    ##
+        $Hash.PSObject.Properties | ForEach-Object {
+            $k = $_.Name
+            $v = $_.Value
+
+            Write-SectionStart $kv $k
+            ##
+                Write-KeyValue $kv $KeyValueColorValueKey $v.Value
+                Write-KeyValue $kv $KeyValueColorHexKey $v.Hex
+                Write-KeyValue $kv $KeyValueColorRedComponentKey $v.Red
+                Write-KeyValue $kv $KeyValueColorGreenComponentKey $v.Green
+                Write-KeyValue $kv $KeyValueColorBlueComponentKey $v.Blue
+                Write-KeyValue $kv $KeyValueColorRedHexComponentKey $v.'Red Hex'
+                Write-KeyValue $kv $KeyValueColorGreenHexComponentKey $v.'Green Hex'
+                Write-KeyValue $kv $KeyValueColorBlueHexComponentKey $v.'Blue HEx'
+                Write-KeyValue $kv $KeyValueColorHueComponentKey $v.Hue
+                Write-KeyValue $kv $KeyValueColorSaturationComponentKey $v.Saturation
+                Write-KeyValue $kv $KeyValueColorBrightnessComponentKey $v.Brightness
+            ##
+            Write-SectionClose $kv
+        }
+    ##
+    Write-SectionClose $kv
+
+    return $kv.ToString()
+}
+
+function ConvertTo-VdfS0 {
+        param(
+        [Parameter(Mandatory, ValueFromPipeline)]
+        [PSCustomObject]$Hash
+    )
+
+    $kv = [Text.StringBuilder]::new()
+    Write-SectionStart $kv $KeyValueColorRootSectionName
+    ##
+        $Hash.PSObject.Properties | ForEach-Object {
+            $k = $_.Name
+            $v = $_.Value
+
+            Write-KeyValue $kv $k $v
+        }
+    ##
+    Write-SectionClose $kv
+
+    return $kv.ToString()
+}
+
 
 New-Constant -Name 'DefaultSourceDirectoryPath' -Value (Join-Path $PSScriptRoot 'maps' 'main')
-New-Constant -Name 'DefaultOutputFilePath' -Value (Join-Path $PSScriptRoot 'maps' 'colors.kv')
+New-Constant -Name 'DefaultOutputFilePath' -Value (Join-Path $PSScriptRoot 'maps' 'colors.json')
 New-Constant -Name 'DefaultExcludeFilePath' -Value (Join-Path $PSScriptRoot 'maps' 'excludes.txt')
 New-Constant -Name 'DefaultSampleColorCount' -Value 4
 

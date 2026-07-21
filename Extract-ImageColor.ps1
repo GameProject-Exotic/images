@@ -87,11 +87,11 @@ if ($includes.Count -Eq 0) {
 $PSStyle.Progress.Style = $ProgressStyle
 $PSStyle.Progress.View = $ProgressView
 
-$kv = [Text.StringBuilder]::new()
-Write-SectionStart $kv $KeyValueColorRootSectionName
+# $kv = [Text.StringBuilder]::new()
+# Write-SectionStart $kv $KeyValueColorRootSectionName
 
 [int]$progress = 0
-$includes | ForEach-Object {
+[object[]]$objects = $includes | ForEach-Object {
     Write-Progress -Id $ProgressImageProcessId `
         -Activity $ProgressImageProcessActivity `
         -Status ($ProgressImageProcessStatus -F $_.BaseName) `
@@ -146,30 +146,79 @@ $includes | ForEach-Object {
 
     [int]$value = [Convert]::ToInt32($hex, 16)
 
-    Write-SectionStart $kv $_.BaseName
-    # {
-        Write-KeyValue $kv $KeyValueColorValueKey $value
-        Write-KeyValue $kv $KeyValueColorHexKey $hex
-        Write-KeyValue $kv $KeyValueColorRedComponentKey $red
-        Write-KeyValue $kv $KeyValueColorGreenComponentKey $green
-        Write-KeyValue $kv $KeyValueColorBlueComponentKey $blue
-        Write-KeyValue $kv $KeyValueColorRedHexComponentKey $hred
-        Write-KeyValue $kv $KeyValueColorGreenHexComponentKey $hgreen
-        Write-KeyValue $kv $KeyValueColorBlueHexComponentKey $hblue
-        Write-KeyValue $kv $KeyValueColorHueComponentKey $hue
-        Write-KeyValue $kv $KeyValueColorSaturationComponentKey $saturation
-        Write-KeyValue $kv $KeyValueColorBrightnessComponentKey $brightness
-    # }
-    Write-SectionClose $kv
-
     ++$progress
+
+    [PSCustomObject]@{
+        Map = $_.BaseName
+        Value = $value
+        Hex = $hex
+        Red = $red
+        Green = $green
+        Blue = $blue
+        'Red Hex' = $hred
+        'Green Hex' = $hgreen
+        'Blue Hex' = $hblue
+        Hue = $hue
+        Saturation = $saturation
+        Brightness = $brightness
+    }
 }
 
-Write-SectionClose $kv
-[void]$kv.Append("`n")
+$enthash = [PSCustomObject]@{}
+if (Test-Path -LiteralPath $OutputFilePath -PathType Leaf) {
+    $enthash =  Get-Content -LiteralPath $OutputFilePath -Raw `
+        | ConvertFrom-Json
+}
 
-$kv.ToString() | Set-Content -LiteralPath $OutputFilePath -Encoding UTF8 -NoNewLine -Force
-"$([string]::Join("`n", ($includes | Select-Object -ExpandProperty BaseName)))`n" | Set-Content -LiteralPath $ExcludeFilePath -Encoding UTF8 -NoNewLine -Force
+$objhash = [PSCustomObject]@{}
+$objects | ForEach-Object {
+    $props = $_ | Select-Object -Property '*' -ExcludeProperty 'Map'
+    $objhash | Add-Member -MemberType NoteProperty -Name $_.Map -Value $props
+}
+
+$exchash = [PSCustomObject]@{}
+$enthash.PSObject.Properties | ForEach-Object {
+    $exchash | Add-Member -MemberType NoteProperty -Name $_.Name -Value $_.Value -Force
+}
+$objhash.PSObject.Properties | ForEach-Object {
+    $exchash | Add-Member -MemberType NoteProperty -Name $_.Name -Value $_.Value -Force
+}
+
+$simhash = [PSCustomObject]@{}
+$exchash.PSObject.Properties | ForEach-Object {
+    $simhash | Add-Member -MemberType NoteProperty -Name $_.Name -Value $_.Value.Value
+}
+
+$fext = [IO.Path]::GetExtension($OutputFilePath)
+$pext = '(\.[^.]*)$'
+
+[string]$simpleOutputJsonPath = $null
+[string]$outputVdfPath = $null
+[string]$simOutputVdfPath = $null
+
+if ([string]::IsNullOrWhiteSpace($fext)) {
+    $simpleOutputJsonPath = "$($OutputFilePath)~s0"
+    $outputVdfPath = "$($OutputFilePath).kv"
+    $simpleOutputVdfPath = "$($OutputFilePath)~s0.kv"
+} else {
+    $simpleOutputJsonPath = $OutputFilePath -Replace $pext, "~s0$($fext)"
+    $outputVdfPath = [IO.Path]::ChangeExtension($OutputFilePath, '.kv')
+    $simpleOutputVdfPath = $OutputFilePath -Replace $pext, '~s0.kv'
+}
+
+$exchash | ConvertTo-Json -Compress `
+    | Set-Content -LiteralPath $OutputFilePath -Encoding UTF8 -Force
+
+$simhash | ConvertTo-Json -Compress `
+    | Set-Content -LiteralPath $simpleOutputJsonPath -Encoding UTF8 -Force
+
+$exchash | ConvertTo-Vdf `
+    | Set-Content -LiteralPath $outputVdfPath -Encoding UTF8 -Force
+
+$simhash | ConvertTo-VdfS0 `
+    | Set-Content -LiteralPath $simpleOutputVdfPath -Encoding UTF8 -Force
+
+$exchash.PSObject.Properties.Name | Set-Content -LiteralPath $ExcludeFilePath -Encoding UTF8 -Force
 
 $PSStyle.Progress.Style = $DefaultProgressStyle
 $PSStyle.Progress.View = $DefaultProgressView
