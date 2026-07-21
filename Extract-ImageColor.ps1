@@ -87,9 +87,6 @@ if ($includes.Count -Eq 0) {
 $PSStyle.Progress.Style = $ProgressStyle
 $PSStyle.Progress.View = $ProgressView
 
-# $kv = [Text.StringBuilder]::new()
-# Write-SectionStart $kv $KeyValueColorRootSectionName
-
 [int]$progress = 0
 [object[]]$objects = $includes | ForEach-Object {
     Write-Progress -Id $ProgressImageProcessId `
