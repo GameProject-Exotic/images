@@ -926,3 +926,6 @@ trikz_ytt_space_fix
 trikz_zen
 trikz_dev_finale
 trikz_joutsenlaulu
+trikz_forgotten
+trikz_playground
+trikz_umbra
