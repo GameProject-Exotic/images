@@ -929,3 +929,4 @@ trikz_joutsenlaulu
 trikz_forgotten
 trikz_playground
 trikz_umbra
+trikz_lithos_final
